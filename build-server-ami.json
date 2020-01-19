@@ -1,0 +1,29 @@
+{
+    "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "region":         "{{env `AWS_REGION`}}",
+        "user":           "{{env `USERNAME`}}",
+        "ssh_public_key": "{{env `SSH_PUBLIC_KEY`}}"
+    },
+    "builders": [
+        {
+            "access_key": "{{user `aws_access_key`}}",
+            "ami_name": "istio-build-server-{{isotime \"2006-01-02-15-04-05\"}}",
+            "instance_type": "t2.micro",
+            "region": "{{ user `region`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "source_ami": "ami-0d1cd67c26f5fca19",
+            "ssh_username": "ubuntu",
+            "type": "amazon-ebs"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "./install-build-dependencies.sh",
+            "environment_vars": ["USERNAME={{user `user`}}",
+                                 "SSH_PUBLIC_KEY={{user `ssh_public_key`}}"]
+        }
+    ]
+}
