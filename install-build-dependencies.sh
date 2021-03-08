@@ -17,7 +17,7 @@ sudo DEBIAN_FRONTEND="noninteractive" apt-get install -y \
   cscope \
   #xsel
 
-LLVM_VERSION=9.0.0
+LLVM_VERSION=10.0.1
 LLVM_TARGET=x86_64-linux-gnu-ubuntu-18.04
 LLVM_BASE_URL=http://releases.llvm.org/${LLVM_VERSION}
 LLVM_ARCHIVE=clang+llvm-${LLVM_VERSION}-${LLVM_TARGET}
